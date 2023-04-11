@@ -3,6 +3,7 @@
  * Tina Ostrander
  * 04/11/2023
  * 328/icecream/process.php
+ * Process Order for Ice Cream Shoppe
  *
  */
 
@@ -32,8 +33,9 @@ error_reporting(E_ALL);
 define('PRICE_PER_SCOOP', 2.00);
 define('SALES_TAX', .08);
 
+$title = "Process Order";
 // include header
-include ('header.html');
+include('header.php');
 ?>
 
 
@@ -42,22 +44,32 @@ include ('header.html');
 
 
     <?php
-        echo "<pre>";
-        var_dump($_POST);
-        echo "</pre>";
+        //echo "<pre>";
+        //var_dump($_POST);
+        //echo "</pre>";
 
+        // Get data from POST array
+        $numScoops = $_POST['scoops'];
         $cone = $_POST['cone'];
-        echo $cone;
+        $flavors = $_POST['flavor'];
+        $flavorList = implode(", ", $flavors);
 
-        $flavorList = implode(", ", $_POST['flavor'])
+        // Make sure flavors does not exceed scoops
+        if (sizeof($flavors) > $numScoops){
+            echo "<h2>Oops! You have more flavors than scoops.</h2>";
+            return;
+        }
 
-            // Calculate price
-        $subtotal = $_POST['scoops'] * PRICE_PER_SCOOP;
+        // Calculate price
+        $subtotal = $numScoops * PRICE_PER_SCOOP;
         $total = $subtotal + ($subtotal * SALES_TAX);
 
-
         // Display summary
-        echo "<p>Number of scoops: "
+        echo "<p>Number of scoops: $numScoops</p>";
+        echo "<p>Cone selection: $cone</p>";
+        echo "<p>Flavors: $flavorList</p>";
+        echo "<p>Subtotal: $" . number_format($subtotal, 2) . "</p>";
+        echo "<p>Total: $" . number_format($total, 2) . "</p>";
     ?>
 
 </div>

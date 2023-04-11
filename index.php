@@ -3,6 +3,7 @@
  * Tina Ostrander
  * 04/11/2023
  * 328/icecream/index.php
+ * Order form for Ice Cream Shoppe
  */
 
 
@@ -15,8 +16,8 @@ error_reporting(E_ALL);
 $flavors = array("vanilla", "chocolate", "strawberry", "caramel");
 $cones = array("sugar"=>"Sugar Cone", "waffle"=>"Waffle Cone", "cup"=>"Cup");
 
-
-include ('header.html');
+$title = "Order Ice cream";
+include('header.php');
 ?>
 
 
